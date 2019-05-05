@@ -15,7 +15,9 @@ pygmentscodefences = true
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [params]
-  sitename = "Vaibhav Pandey"
+  sitename = "Vaibhav's desk"
+  author = "Vaibhav Pandey"
+  dateFormat = "2019/01/02"
 
 [[menu.main]]
     name = "Medium"
