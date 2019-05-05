@@ -1,6 +1,6 @@
-baseurl = "https://nanx.me/hugo-tanka/"
-title = "Hugo Tanka Theme"
-author = "Nan Xiao"
+baseurl = "/"
+title = "Thoughts & experiments by Vaibhav"
+author = "Vaibhav Pandey"
 canonifyurls = true
 languagecode = "en"
 theme = "hugo-tanka"
@@ -15,25 +15,25 @@ pygmentscodefences = true
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [params]
-  sitename = "Hugo Tanka Theme"
+  sitename = "Vaibhav Pandey"
 
 [[menu.main]]
-    name = "Home"
-    url = "https://nanx.me"
+    name = "Medium"
+    url = "https://medium.com/vaibhav31"
     weight = 1
 [[menu.main]]
-    name = "GitHub"
-    url = "https://github.com/nanxstats"
+    name = "Linkedin"
+    url = "https://www.linkedin.com/in/vaibhavpandey45/"
     weight = 2
 [[menu.main]]
-    name = "LinkedIn"
-    url = "https://www.linkedin.com/in/nanxstats"
+    name = "Twitter"
+    url = "https://twitter.com/vaibhav_pandey"
     weight = 3
 [[menu.main]]
-    name = "Twitter"
-    url = "https://twitter.com/nanxstats"
+    name = "Github"
+    url = "https://github.com/fcvaibhav"
     weight = 4
 [[menu.main]]
-    name = "RSS"
-    url = "/index.xml"
+    name = "Dvis"
+    url = "/data.rmd"
     weight = 5
