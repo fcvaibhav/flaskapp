@@ -3,8 +3,49 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/categories/</loc>
+    <lastmod>2019-05-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/exploring-forbes-2018-list-with-forbeslist-package/</loc>
+    <lastmod>2019-05-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/</loc>
-    <lastmod>2017-12-26T00:00:00+00:00</lastmod>
+    <lastmod>2019-05-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2019-05-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/r-markdown/</loc>
+    <lastmod>2019-05-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-05-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-05-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/forbes/</loc>
+    <lastmod>2019-05-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -14,55 +55,8 @@
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2017-12-26T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/a-plain-markdown-post/</loc>
     <lastmod>2016-12-30T21:49:57-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/hello-r-markdown/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/r/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/r-markdown/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/plot/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/regression/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

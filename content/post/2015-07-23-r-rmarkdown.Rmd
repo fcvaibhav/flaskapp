@@ -1,37 +1,62 @@
 ---
-title: "Hello R Markdown"
-author: "Frida Gomam"
-date: 2015-07-23T21:13:14-05:00
+title: "Exploring Forbes 2018 List with forbesList package"
+author: "Vaibhav Pandey"
+date: 2019-05-18
 categories: ["R"]
-tags: ["R Markdown", "plot", "regression"]
+tags: ["R Markdown", "forbes"]
 ---
 
+
+# Using forbesListR package
+
+We'll access forbes list through forbesListR package. For more details see <https://github.com/abresler/forbesListR>.
+
 ```{r setup, include=FALSE}
+options(kableExtra.html.bsTable = TRUE)
 knitr::opts_chunk$set(collapse = TRUE)
+library(forbesListR)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(plotly)
 ```
 
-# R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-fit <- lm(dist ~ speed, data = cars)
-fit
+Let's begin by loading the packages, calling the Forbes billionaires list, and formatting the data
+```{r message = FALSE, warning = FALSE}
+forbes_data <- get_year_forbes_list_data(list = "Billionaires", year = 2018)
+forbes_data_clean <- forbes_data %>% 
+  mutate(`Net worth (Bn USD)` = round(net_worth.millions/1000,2),
+         Image = paste0('![](', url.image, ')')) %>% 
+  rename(Industry = industry, HQ = headquarters, Age = age, Name = name) %>%
+  select(Name, Image, Age, `Net worth (Bn USD)`, Industry, HQ)
 ```
 
-# Including Plots
 
-You can also embed plots. See Figure \@ref(fig:pie) for example:
+## Let's start by printing top 10 entries in the list
+```{r plot1, message = FALSE, warning = FALSE}
+forbes_data_clean %>% 
+  head(10) %>%
+  kable(caption = "Top 10 in Forbes 2018") %>% 
+  kableExtra::kable_styling(bootstrap_options = "responsive")
+```
 
-```{r pie, fig.cap='A fancy pie chart.', tidy=FALSE}
-par(mar = c(0, 1, 0, 1))
-pie(
-  c(280, 60, 20),
-  c('Sky', 'Sunny side of pyramid', 'Shady side of pyramid'),
-  col = c('#0292D8', '#F7EA39', '#C4B632'),
-  init.angle = -50, border = NA
-)
+## Let's now explore the distribution of billionaires by industry
+```{r echo = FALSE, message = FALSE, warning = FALSE}
+forbes_data_clean <- forbes_data_clean%>%
+                            group_by(Industry) %>%
+                            summarise(Count = n(), `Total wealth` = round(sum(`Net worth (Bn USD)`, na.rm = TRUE)/1000,2)) %>% 
+  reshape2::melt(id = "Industry") %>%
+  filter(!is.na(Industry))
+
+# count by industry
+ggplotly(forbes_data_clean %>% 
+  ggplot(aes(x = reorder(Industry,value))) +
+   geom_bar(aes(y = value, fill = Industry), stat = "Identity") +
+   geom_text(aes(y = value*0.7, label = value),color = "#ffffff", size = 3, check_overlap = TRUE) +
+   coord_flip() +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  labs(x = "Industry", y = "Count / Wealth(Trillion USD)")+
+  facet_wrap(.~variable, scales = "free") )
 ```
