@@ -53,10 +53,10 @@ forbes_data_clean <- forbes_data_clean%>%
 ggplotly(forbes_data_clean %>% 
   ggplot(aes(x = reorder(Industry,value))) +
    geom_bar(aes(y = value, fill = Industry), stat = "Identity") +
-   geom_text(aes(y = value*0.7, label = value),color = "#ffffff", size = 3, check_overlap = TRUE) +
-   coord_flip() +
+   geom_text(aes(y = value, label = value),position = position_stack(vjust = 0.5), color = "#ffffff", size = 3, check_overlap = TRUE) +
+     coord_flip() +
   theme_minimal() +
   theme(legend.position = "none") + 
-  labs(x = "Industry", y = "Count / Wealth(Trillion USD)")+
-  facet_wrap(.~variable, scales = "free") )
+  labs(x = "", y = "Count / Wealth(Trillion USD)")+
+  facet_wrap(.~variable, scales = "free"), tooltip =  c("Industry","value") )
 ```
