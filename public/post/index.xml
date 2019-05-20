@@ -22,41 +22,5 @@ Let’s begin by loading the packages, calling the Forbes billionaires list, and
 forbes_data &amp;lt;- get_year_forbes_list_data(list = &amp;quot;Billionaires&amp;quot;, year = 2018) forbes_data_clean &amp;lt;- forbes_data %&amp;gt;% mutate(`Net worth (Bn USD)` = round(net_worth.millions/1000,2), Image = paste0(&amp;#39;![](&amp;#39;, url.image, &amp;#39;)&amp;#39;)) %&amp;gt;% rename(Industry = industry, HQ = headquarters, Age = age, Name = name) %&amp;gt;% select(Name, Image, Age, `Net worth (Bn USD)`, Industry, HQ) forbes_data_clean$Age_group &amp;lt;- sapply(forbes_data_clean$Age, age_group) Let’s start by printing top 10 entries in the list forbes_data_clean %&amp;gt;% head(10) %&amp;gt;% kable(caption = &amp;quot;Top 10 in Forbes 2018&amp;quot;) %&amp;gt;% kableExtra::kable_styling(bootstrap_options = &amp;quot;responsive&amp;quot;)  Table 1: Top 10 in Forbes 2018    Name  Image  Age  Net worth (Bn USD)  Industry  HQ  Age_group      Jeff Bezos   55  112.</description>
     </item>
     
-    <item>
-      <title>Tanka Theme Demo</title>
-      <link>/tanka-theme-demo/</link>
-      <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tanka-theme-demo/</guid>
-      <description>Tanka is a minimalist, text-oriented, and performant Hugo theme.
-Features  Minimalist Responsive Typography first High Contrast Disqus Google Analytics  Typography h1 Heading h2 Heading h3 Heading h4 Heading h5 Heading h6 Heading This is bold text
-This is bold text
-This is italic text
-This is italic text
-Deleted text
- Block quotes are written like so.
-They can span multiple paragraphs, if you like.
- Some text, and some code and then a nice plain link with title.</description>
-    </item>
-    
-    <item>
-      <title>A Plain Markdown Post</title>
-      <link>/a-plain-markdown-post/</link>
-      <pubDate>Fri, 30 Dec 2016 21:49:57 -0700</pubDate>
-      
-      <guid>/a-plain-markdown-post/</guid>
-      <description>This is a post written in plain Markdown (*.md) instead of R Markdown (*.Rmd). The major differences are:
- You cannot run any R code in a plain Markdown document, whereas in an R Markdown document, you can embed R code chunks (```{r}); A plain Markdown post is rendered through Blackfriday, and an R Markdown document is compiled by rmarkdown and Pandoc.  There are many differences in syntax between Blackfriday&amp;rsquo;s Markdown and Pandoc&amp;rsquo;s Markdown.</description>
-    </item>
-    
-    <item>
-      <title>Lorem Ipsum</title>
-      <link>/lorem-ipsum/</link>
-      <pubDate>Thu, 01 Jan 2015 13:09:13 -0600</pubDate>
-      
-      <guid>/lorem-ipsum/</guid>
-      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
-    </item>
-    
   </channel>
 </rss>

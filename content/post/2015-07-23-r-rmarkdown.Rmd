@@ -23,10 +23,10 @@ library(plotly)
 
 age_group <- function(x){
     if(!is.na(x) | is.null(x)){
-    if(x<35) {return("Under 30")}
-    else if (x<50) {return("35 to 50")}
-    else if (x <70) {return("50 to 70")}
-    else {return("70+")}
+    if(x<35) {return("1. Under 30")}
+    else if (x<50) {return("2. 35 to 50")}
+    else if (x <70) {return("3. 50 to 70")}
+    else {return("4. 70+")}
     }
     else{return(NA)}
 }
