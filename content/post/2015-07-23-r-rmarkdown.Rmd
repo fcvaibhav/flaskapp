@@ -63,13 +63,13 @@ forbes_data_industry <- forbes_data_clean%>%
 
 ggplotly(forbes_data_industry %>% 
   ggplot(aes(x = reorder(Industry,value))) +
-   geom_bar(aes(y = value, fill = Industry), stat = "Identity") +
+   geom_bar(aes(y = value, fill = Industry,text = paste('Industry: ', Industry,'<br>Value:', value)), stat = "Identity") +
    geom_text(aes(y = value, label = value),position = position_stack(vjust = 0.5), color = "#ffffff", size = 3, check_overlap = TRUE) +
      coord_flip() +
   theme_minimal() +
   theme(legend.position = "none") + 
   labs(x = "", y = "Count / Wealth(Trillion USD)")+
-  facet_wrap(.~variable, scales = "free"), tooltip =  c("Industry","value") )
+  facet_wrap(.~variable, scales = "free"), tooltip =  "text" )
 ```
 
 
@@ -83,12 +83,12 @@ forbes_data_age <- forbes_data_clean%>%
 
 ggplotly(forbes_data_age %>% 
   ggplot(aes(x = reorder(Age_group,value, max))) +
-   geom_bar(aes(y = value, fill = Age_group), stat = "Identity") +
+   geom_bar(aes(y = value, fill = Age_group,  text = paste('Age_group: ', Age_group,'<br>Value:', value)), stat = "Identity") +
    geom_text(aes(y = value, label = value),position = position_stack(vjust = 0.5), color = "#ffffff", size = 3, check_overlap = TRUE) +
      coord_flip() +
   theme_minimal() +
   theme(legend.position = "none") + 
   labs(x = "", y = "Count / Wealth(Trillion USD)")+
-  facet_wrap(.~variable, scales = "free"), tooltip =  c("Age group","value") )
+  facet_wrap(.~variable, scales = "free"), tooltip = "text")
 ```
 
