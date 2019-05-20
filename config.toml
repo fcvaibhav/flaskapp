@@ -1,5 +1,5 @@
 baseurl = "/"
-title = "Thoughts & experiments by Vaibhav"
+title = "Thoughts & experiments"
 author = "Vaibhav Pandey"
 canonifyurls = true
 languagecode = "en"
@@ -18,7 +18,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     post = "/:slug/"
 
 [params]
-  sitename = "Vaibhav's desk"
+  sitename = "Vaibhav Pandey"
   author = "Vaibhav Pandey"
   dateFormat = "2019/01/02"
 
