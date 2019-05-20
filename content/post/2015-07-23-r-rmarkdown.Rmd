@@ -20,6 +20,16 @@ library(knitr)
 library(kableExtra)
 library(ggplot2)
 library(plotly)
+
+age_group <- function(x){
+    if(!is.na(x) | is.null(x)){
+    if(x<35) {return("Under 30")}
+    else if (x<50) {return("35 to 50")}
+    else if (x <70) {return("50 to 70")}
+    else {return("70+")}
+    }
+    else{return(NA)}
+}
 ```
 
 Let's begin by loading the packages, calling the Forbes billionaires list, and formatting the data
@@ -30,6 +40,8 @@ forbes_data_clean <- forbes_data %>%
          Image = paste0('![](', url.image, ')')) %>% 
   rename(Industry = industry, HQ = headquarters, Age = age, Name = name) %>%
   select(Name, Image, Age, `Net worth (Bn USD)`, Industry, HQ)
+
+forbes_data_clean$Age_group <- sapply(forbes_data_clean$Age, age_group)
 ```
 
 
@@ -43,14 +55,13 @@ forbes_data_clean %>%
 
 ## Let's now explore the distribution of billionaires by industry
 ```{r echo = FALSE, message = FALSE, warning = FALSE}
-forbes_data_clean <- forbes_data_clean%>%
+forbes_data_industry <- forbes_data_clean%>%
                             group_by(Industry) %>%
                             summarise(Count = n(), `Total wealth` = round(sum(`Net worth (Bn USD)`, na.rm = TRUE)/1000,2)) %>% 
   reshape2::melt(id = "Industry") %>%
   filter(!is.na(Industry))
 
-# count by industry
-ggplotly(forbes_data_clean %>% 
+ggplotly(forbes_data_industry %>% 
   ggplot(aes(x = reorder(Industry,value))) +
    geom_bar(aes(y = value, fill = Industry), stat = "Identity") +
    geom_text(aes(y = value, label = value),position = position_stack(vjust = 0.5), color = "#ffffff", size = 3, check_overlap = TRUE) +
@@ -60,3 +71,24 @@ ggplotly(forbes_data_clean %>%
   labs(x = "", y = "Count / Wealth(Trillion USD)")+
   facet_wrap(.~variable, scales = "free"), tooltip =  c("Industry","value") )
 ```
+
+
+## Distribution by age
+```{r echo = FALSE, message = FALSE, warning = FALSE}
+forbes_data_age <- forbes_data_clean%>%
+                            group_by(Age_group) %>%
+                            summarise(Count = n(), `Total wealth` = round(sum(`Net worth (Bn USD)`, na.rm = TRUE)/1000,2)) %>% 
+  reshape2::melt(id = "Age_group") %>%
+  filter(!is.na(Age_group))
+
+ggplotly(forbes_data_age %>% 
+  ggplot(aes(x = reorder(Age_group,value, max))) +
+   geom_bar(aes(y = value, fill = Age_group), stat = "Identity") +
+   geom_text(aes(y = value, label = value),position = position_stack(vjust = 0.5), color = "#ffffff", size = 3, check_overlap = TRUE) +
+     coord_flip() +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  labs(x = "", y = "Count / Wealth(Trillion USD)")+
+  facet_wrap(.~variable, scales = "free"), tooltip =  c("Age group","value") )
+```
+
