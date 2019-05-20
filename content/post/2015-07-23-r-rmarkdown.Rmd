@@ -32,14 +32,14 @@ age_group <- function(x){
 }
 ```
 
-Let's begin by loading the packages, calling the Forbes billionaires list, and formatting the data
+After loading the packages, calling the Forbes billionaires list, and formatting the data
 ```{r message = FALSE, warning = FALSE}
 forbes_data <- get_year_forbes_list_data(list = "Billionaires", year = 2018)
 forbes_data_clean <- forbes_data %>% 
   mutate(`Net worth (Bn USD)` = round(net_worth.millions/1000,2),
          Image = paste0('![](', url.image, ')')) %>% 
-  rename(Industry = industry, HQ = headquarters, Age = age, Name = name) %>%
-  select(Name, Image, Age, `Net worth (Bn USD)`, Industry, HQ)
+  rename(Industry = industry, Country = country, Age = age, Name = name) %>%
+  select(Name, Image, Age, `Net worth (Bn USD)`, Country, Industry)
 
 forbes_data_clean$Age_group <- sapply(forbes_data_clean$Age, age_group)
 ```
@@ -48,6 +48,7 @@ forbes_data_clean$Age_group <- sapply(forbes_data_clean$Age, age_group)
 ## Let's start by printing top 10 entries in the list
 ```{r plot1, message = FALSE, warning = FALSE}
 forbes_data_clean %>% 
+  selec(-Age_group) %>%
   head(10) %>%
   kable(caption = "Top 10 in Forbes 2018") %>% 
   kableExtra::kable_styling(bootstrap_options = "responsive")
@@ -57,7 +58,7 @@ forbes_data_clean %>%
 ```{r echo = FALSE, message = FALSE, warning = FALSE}
 forbes_data_industry <- forbes_data_clean%>%
                             group_by(Industry) %>%
-                            summarise(Count = n(), `Total wealth` = round(sum(`Net worth (Bn USD)`, na.rm = TRUE)/1000,2)) %>% 
+                            summarise(Count = n(), `Total wealth (T $)` = round(sum(`Net worth (Bn USD)`, na.rm = TRUE)/1000,2)) %>% 
   reshape2::melt(id = "Industry") %>%
   filter(!is.na(Industry))
 
@@ -68,7 +69,7 @@ ggplotly(forbes_data_industry %>%
      coord_flip() +
   theme_minimal() +
   theme(legend.position = "none") + 
-  labs(x = "", y = "Count / Wealth(Trillion USD)")+
+  labs(x = "", y = "")+
   facet_wrap(.~variable, scales = "free"), tooltip =  "text" )
 ```
 
@@ -82,7 +83,7 @@ forbes_data_age <- forbes_data_clean%>%
   filter(!is.na(Age_group))
 
 ggplotly(forbes_data_age %>% 
-  ggplot(aes(x = reorder(Age_group,value, max))) +
+  ggplot(aes(x = Age_group)) +
    geom_bar(aes(y = value, fill = Age_group,  text = paste('Age_group: ', Age_group,'<br>Value:', value)), stat = "Identity") +
    geom_text(aes(y = value, label = value),position = position_stack(vjust = 0.5), color = "#ffffff", size = 3, check_overlap = TRUE) +
      coord_flip() +
