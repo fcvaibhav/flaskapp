@@ -1,5 +1,5 @@
 ---
-title: "Exploring Forbes 2018 List with forbesList package"
+title: "Exploring forbes 2018 list with forbesList package"
 author: "Vaibhav Pandey"
 date: 2019-05-18
 categories: ["R"]
