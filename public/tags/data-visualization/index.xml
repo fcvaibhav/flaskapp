@@ -17,9 +17,7 @@
       <pubDate>Mon, 20 May 2019 00:00:00 +0000</pubDate>
       
       <guid>/exploring-google-trends-with-gtrendsr/</guid>
-      <description>Using gtrendsR package Let’s explore some basic trends regarding career interests of fresh graduates in India. We’ll do a quick exploration of search trends on web and youtube concerning some major entrance exams and important educational content.
-We’ll access the data through gtrendsR package. For more details see https://github.com/PMassicotte/gtrendsR or read this pdf https://cran.r-project.org/web/packages/gtrendsR/gtrendsR.pdf
-Let’s begin by comparing the interests of students in UG entrance exams Three most common areas of interest for UG programs are Engineering, Medical, and Law.</description>
+      <description>Using gtrendsR package Let’s explore some basic trends on usage of popular tech products in India. We’ll do a quick exploration of search trends on web. We will try to be careful that there is some logic to higher usage leading to more web searches. Still, don’t take it as a rigorous way to analyse, but only as a fun way to explore the functionality of an R package.</description>
     </item>
     
   </channel>

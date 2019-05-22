@@ -9,7 +9,7 @@ tags: ["Data visualization"]
 
 # Using gtrendsR package
 
-Let's explore some basic trends regarding career interests of fresh graduates in India. We'll do a quick exploration of search trends on web and youtube concerning some major entrance exams and important educational content.
+Let's explore some basic trends on usage of popular tech products in India. We'll do a quick exploration of search trends on web. We will try to be careful that there is some logic to higher usage leading to more web searches. Still, don't take it as a rigorous way to analyse, but only as a fun way to explore the functionality of an R package.
 
 We'll access the data through gtrendsR package. For more details see <https://github.com/PMassicotte/gtrendsR> or read this pdf <https://cran.r-project.org/web/packages/gtrendsR/gtrendsR.pdf>
 
@@ -21,11 +21,8 @@ We'll access the data through gtrendsR package. For more details see <https://gi
       library(kableExtra)
       library(ggplot2)
       library(gganimate)
+      library(ggthemes)
       library(gifski)
-
-examlist <- c("UPSC exam", "SSC exam", "Police exam")
-
-applist <- c("facebook", "whatsapp", "youtube", "instagram", "tiktok")
 
 plot_trends <- function(data){
     plot_data <- data$interest_over_time
@@ -41,18 +38,58 @@ plot_trends <- function(data){
     }
     
     ggplot(plot_data, aes(x=date,y=hits, color = keyword, group = keyword)) +
-      geom_path(size = 1)  + labs(x="Date", y = "Hits") + theme_minimal() +
-    theme(legend.position = "top") + transition_reveal(date)
+      geom_path(size = 1)  + labs(x="Date", y = "Hits") + theme_tufte() +
+    theme(legend.position = "top")
 }
 ```
 
-## Let's begin by comparing the interests of students in UG entrance exams
+#### Let's begin by comparing the search volumes for 2 most popular apps in India - Facebook & Youtube 
+(excluding whatsapp from the analysis as its search volume is lot less likely to be related to actual usage)
 
-Three most common areas of interest for UG programs are Engineering, Medical, and Law. Let's see how the search volume varies for top exams in these categories over last 5 years.
+Note: plot_trends() is a custom function (code not included here)
 
 ```{r message = FALSE, warning = FALSE}
-ug_list <- c("JEE MAIN", "NEET", "CLAT")
-ug_data <- gtrends(keyword = ug_list, geo = "IN", gprop = "web", time = "today+5-y")
+app_list <- c("facebook", "youtube")
+app_data <- gtrends(keyword = app_list, geo = "IN", gprop = "web", time = "today+5-y")
 
-plot_trends(ug_data)
+plot_trends(app_data)
 ```
+There's a clear decline in the web searches for facebook, which should correspond to some decrease in web usage of the platform and/or searches within the platform by logged in users. The upswing that is visible on youtube's trajectory in the second half of 2017 can be safely attributed to the increasing availablity of 4G & Public wi-fi in India. There's a sharp rise and then drop in the second half of 2019, which is difficult to answer with public data.
+
+
+#### From user generated conten to ecommerce, comparing top ecommerce websites in Indian market
+
+```{r message = FALSE, warning = FALSE}
+ecomm_list <- c("Flipkart", "Amazon", "Myntra", "Snapdeal")
+ecomm_data <- gtrends(keyword = ecomm_list, geo = "IN", gprop = "web", time = "today+5-y")
+
+plot_trends(ecomm_data)
+```
+The initial years clearly show the head start which Flipkart enjoyed. Amazon has steadily gained momentum and is currently neck to neck with flipkar. From search volume related to Myntra and snapdeal, it appears there has beeen a dip or may be the major customer base is primarily active on the app. The sudden peaks around October/November points to the sales during Diwali festival which is the peak season for all the players. 
+
+#### Time for food delivery, let's see how the top two players compare
+```{r message = FALSE, warning = FALSE}
+food_list <- c("Zomato", "Swiggy")
+food_data <- gtrends(keyword = food_list, geo = "IN", gprop = "web", time = "today+5-y")
+
+plot_trends(food_data)
+```
+Nail biting stuff going on here.
+
+#### Competition is intensifying, it's Uber vs Ola now
+```{r message = FALSE, warning = FALSE}
+cab_list <- c("Ola", "Uber")
+cab_data <- gtrends(keyword = cab_list, geo = "IN", gprop = "web", time = "today+5-y")
+plot_trends(cab_data)
+```
+Another neck to neck battle, Ola seems to have defended well. The jump in search volume from mid 2018 could be a result of uber eats launch in India.
+
+#### Finally, to entertainment, comparing 3 popular platforms among many 
+```{r message = FALSE, warning = FALSE}
+video_list <- c("hotstar", "netflix","prime video")
+video_data <- gtrends(keyword = video_list, geo = "IN", gprop = "web", time = "today+5-y")
+plot_trends(video_data)
+```
+Hotstar is inciting heavy interest in search which keeps spiking as per cricket schedule. We can even see the spike in Mar-Apr 2019, due to recently conducted Indian Premier League (Cricket tournament).
+
+That's it, Folks!
