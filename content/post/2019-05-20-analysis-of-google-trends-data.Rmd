@@ -1,0 +1,58 @@
+---
+title: Exploring search trends with gtrendsR
+author: ~
+date: '2019-05-20'
+slug: exploring-google-trends-with-gtrendsr
+categories: ["R"]
+tags: ["Data visualization"]
+---
+
+# Using gtrendsR package
+
+Let's explore some basic trends regarding career interests of fresh graduates in India. We'll do a quick exploration of search trends on web and youtube concerning some major entrance exams and important educational content.
+
+We'll access the data through gtrendsR package. For more details see <https://github.com/PMassicotte/gtrendsR> or read this pdf <https://cran.r-project.org/web/packages/gtrendsR/gtrendsR.pdf>
+
+```{r setup, include=FALSE}
+      knitr::opts_chunk$set(collapse = TRUE)
+      library(gtrendsR)
+      library(dplyr)
+      library(knitr)
+      library(kableExtra)
+      library(ggplot2)
+      library(gganimate)
+      library(gifski)
+
+examlist <- c("UPSC exam", "SSC exam", "Police exam")
+
+applist <- c("facebook", "whatsapp", "youtube", "instagram", "tiktok")
+
+plot_trends <- function(data){
+    plot_data <- data$interest_over_time
+    plot_data$hits <- as.numeric(plot_data$hits)
+    plot_data$hits[is.na(plot_data$hits)] <- 0
+    
+    plot_data <- plot_data %>% group_by(date, keyword) %>%
+                    summarise(hits = sum(hits))
+    last_row <- plot_data[nrow(plot_data),]
+
+    for (i in 1:10) {
+      plot_data <- plot_data %>% bind_rows(last_row)
+    }
+    
+    ggplot(plot_data, aes(x=date,y=hits, color = keyword, group = keyword)) +
+      geom_path(size = 1)  + labs(x="Date", y = "Hits") + theme_minimal() +
+    theme(legend.position = "top") + transition_reveal(date)
+}
+```
+
+## Let's begin by comparing the interests of students in UG entrance exams
+
+Three most common areas of interest for UG programs are Engineering, Medical, and Law. Let's see how the search volume varies for top exams in these categories over last 5 years.
+
+```{r message = FALSE, warning = FALSE}
+ug_list <- c("JEE MAIN", "NEET", "CLAT")
+ug_data <- gtrends(keyword = ug_list, geo = "IN", gprop = "web", time = "today+5-y")
+
+plot_trends(ug_data)
+```

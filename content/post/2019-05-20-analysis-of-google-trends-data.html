@@ -1,0 +1,25 @@
+---
+title: Exploring search trends with gtrendsR
+author: ~
+date: '2019-05-20'
+slug: exploring-google-trends-with-gtrendsr
+categories: ["R"]
+tags: ["Data visualization"]
+---
+
+
+
+<div id="using-gtrendsr-package" class="section level1">
+<h1>Using gtrendsR package</h1>
+<p>Let’s explore some basic trends regarding career interests of fresh graduates in India. We’ll do a quick exploration of search trends on web and youtube concerning some major entrance exams and important educational content.</p>
+<p>We’ll access the data through gtrendsR package. For more details see <a href="https://github.com/PMassicotte/gtrendsR" class="uri">https://github.com/PMassicotte/gtrendsR</a> or read this pdf <a href="https://cran.r-project.org/web/packages/gtrendsR/gtrendsR.pdf" class="uri">https://cran.r-project.org/web/packages/gtrendsR/gtrendsR.pdf</a></p>
+<div id="lets-begin-by-comparing-the-interests-of-students-in-ug-entrance-exams" class="section level2">
+<h2>Let’s begin by comparing the interests of students in UG entrance exams</h2>
+<p>Three most common areas of interest for UG programs are Engineering, Medical, and Law. Let’s see how the search volume varies for top exams in these categories over last 5 years.</p>
+<pre class="r"><code>ug_list &lt;- c(&quot;JEE MAIN&quot;, &quot;NEET&quot;, &quot;CLAT&quot;)
+ug_data &lt;- gtrends(keyword = ug_list, geo = &quot;IN&quot;, gprop = &quot;web&quot;, time = &quot;today+5-y&quot;)
+
+plot_trends(ug_data)</code></pre>
+<p><img src="/post/2019-05-20-analysis-of-google-trends-data_files/figure-html/unnamed-chunk-1-1.gif" /><!-- --></p>
+</div>
+</div>

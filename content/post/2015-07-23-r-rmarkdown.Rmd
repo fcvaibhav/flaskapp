@@ -48,7 +48,7 @@ forbes_data_clean$Age_group <- sapply(forbes_data_clean$Age, age_group)
 ## Let's start by printing top 10 entries in the list
 ```{r plot1, message = FALSE, warning = FALSE}
 forbes_data_clean %>% 
-  selec(-Age_group) %>%
+  select(-Age_group) %>%
   head(10) %>%
   kable(caption = "Top 10 in Forbes 2018") %>% 
   kableExtra::kable_styling(bootstrap_options = "responsive")

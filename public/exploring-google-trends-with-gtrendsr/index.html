@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
+  
+
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <title>
+    
+    
+     Exploring search trends with gtrendsR 
+    
+  </title>
+  <link rel="canonical" href="/exploring-google-trends-with-gtrendsr/">
+
+  <link rel="stylesheet" href="/css/fonts.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+
+  
+</head>
+
+<body>
+<section id=nav>
+  <h1><a href="/">Vaibhav Pandey</a></h1>
+  <ul>
+    
+    <li><a href="https://medium.com/vaibhav31">Medium</a></li>
+    
+    <li><a href="https://www.linkedin.com/in/vaibhavpandey45/">Linkedin</a></li>
+    
+    <li><a href="https://twitter.com/vaibhav_pandey">Twitter</a></li>
+    
+    <li><a href="https://github.com/fcvaibhav">Github</a></li>
+    
+  </ul>
+</section>
+
+
+<section id=content>
+  <h1> Exploring search trends with gtrendsR </h1>
+
+  <div id=sub-header>
+     · 2019/05/20 · 1 minute read
+  </div>
+
+  <div class="entry-content">
+    
+
+
+<div id="using-gtrendsr-package" class="section level1">
+<h1>Using gtrendsR package</h1>
+<p>Let’s explore some basic trends regarding career interests of fresh graduates in India. We’ll do a quick exploration of search trends on web and youtube concerning some major entrance exams and important educational content.</p>
+<p>We’ll access the data through gtrendsR package. For more details see <a href="https://github.com/PMassicotte/gtrendsR" class="uri">https://github.com/PMassicotte/gtrendsR</a> or read this pdf <a href="https://cran.r-project.org/web/packages/gtrendsR/gtrendsR.pdf" class="uri">https://cran.r-project.org/web/packages/gtrendsR/gtrendsR.pdf</a></p>
+<div id="lets-begin-by-comparing-the-interests-of-students-in-ug-entrance-exams" class="section level2">
+<h2>Let’s begin by comparing the interests of students in UG entrance exams</h2>
+<p>Three most common areas of interest for UG programs are Engineering, Medical, and Law. Let’s see how the search volume varies for top exams in these categories over last 5 years.</p>
+<pre class="r"><code>ug_list &lt;- c(&quot;JEE MAIN&quot;, &quot;NEET&quot;, &quot;CLAT&quot;)
+ug_data &lt;- gtrends(keyword = ug_list, geo = &quot;IN&quot;, gprop = &quot;web&quot;, time = &quot;today+5-y&quot;)
+
+plot_trends(ug_data)</code></pre>
+<p><img src="/post/2019-05-20-analysis-of-google-trends-data_files/figure-html/unnamed-chunk-1-1.gif" /><!-- --></p>
+</div>
+</div>
+
+  </div>
+
+  <div id=links>
+    
+      <a class="basic-alignment left" href="/exploring-forbes-2018-list-with-forbeslist-package/">&laquo; Exploring Forbes 2018 List with forbesList package</a>
+    
+    
+  </div>
+</section>
+
+<section id="comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+      
+      
+      if (window.location.hostname == "localhost")
+                return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = '';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+  
+  
+
+
+</body>
+</html>
+

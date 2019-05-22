@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data visualization on Thoughts &amp; experiments</title>
+    <link>/tags/data-visualization/</link>
+    <description>Recent content in Data visualization on Thoughts &amp; experiments</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 20 May 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/data-visualization/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Exploring search trends with gtrendsR</title>
+      <link>/exploring-google-trends-with-gtrendsr/</link>
+      <pubDate>Mon, 20 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/exploring-google-trends-with-gtrendsr/</guid>
+      <description>Using gtrendsR package Let’s explore some basic trends regarding career interests of fresh graduates in India. We’ll do a quick exploration of search trends on web and youtube concerning some major entrance exams and important educational content.
+We’ll access the data through gtrendsR package. For more details see https://github.com/PMassicotte/gtrendsR or read this pdf https://cran.r-project.org/web/packages/gtrendsR/gtrendsR.pdf
+Let’s begin by comparing the interests of students in UG entrance exams Three most common areas of interest for UG programs are Engineering, Medical, and Law.</description>
+    </item>
+    
+  </channel>
+</rss>
