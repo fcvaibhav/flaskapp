@@ -1,0 +1,94 @@
+---
+title: Drawing mathematical flowers with R
+author: ~
+date: '2019-08-01'
+slug: drawing-mathematical-flowers-with-r
+categories: []
+tags: []
+---
+
+# Exploring visualisation with ggplot while playing with numbers
+In this post we'll create a 'flowery' pattern using geom_point function. Let's see how we build toward it step by step. (PS- I did this exercise as a part of a project in datacamp)
+
+```{r setup, include=FALSE}
+      knitr::opts_chunk$set(collapse = TRUE)
+      library(ggplot2)
+      options(repr.plot.width = 4, repr.plot.height = 4)
+
+```
+
+#### Let's begin by creating a basic circle in R
+
+```{r message = FALSE, warning = FALSE}
+t <- seq(0, 2*pi, length.out = 50)
+x <- sin(t)
+y <- cos(t)
+df <- data.frame(t, x, y)
+
+# Make a scatter plot of points in a circle
+p <- ggplot(df, aes(x, y))
+p + geom_point()
+```
+
+#### Let us now increase the points, add the magic of golden ratio, and create a spiralling effect
+
+```{r message = FALSE, warning = FALSE}
+# Defining the number of points
+points <- 500
+# Defining the Golden Angle
+angle <- pi*(3-sqrt(5))
+
+t <- (1:points) * angle
+x <- sin(t)
+y <-cos(t)
+df <- data.frame(t, x, y)
+
+# Make a scatter plot of points in a spiral
+p <- ggplot(df, aes(x*t, y*t))
+p + geom_point()
+```
+
+#### Next we move on to removing the distractions and adding color
+
+```{r message = FALSE, warning = FALSE}
+p + geom_point(size = 8, alpha = 0.5, color = "darkgreen") + theme(axis.line=element_blank(),axis.text.x=element_blank(),
+          axis.text.y=element_blank(),axis.ticks=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank(),legend.position="none",
+          panel.background=element_rect(fill="white"),panel.border=element_blank(),panel.grid = element_blank(), panel.grid.major=element_blank(),
+          panel.grid.minor=element_blank(),plot.background=element_rect(fill="white"))
+```
+
+#### Next we play more with colour and shapes of points and attempt to create a sunflower like image using a magenta background and yellow points
+
+```{r message = FALSE, warning = FALSE}
+p + geom_point(aes(size = t), alpha = 0.5, color = "yellow", shape = 17) + theme(axis.line=element_blank(),axis.text.x=element_blank(),
+          axis.text.y=element_blank(),axis.ticks=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank(),legend.position="none",
+          panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
+          panel.grid.minor=element_blank(),plot.background=element_rect(fill="darkmagenta"))
+```
+
+#### Lastly, with another experimentation, let's add a hynotic feel to the flower image by increasing the points, increasing the size of the points, and altering the angle
+
+```{r message = FALSE, warning = FALSE}
+angle <- 13*pi/180
+points <- 2000
+
+t <- (1:points)*angle
+x <- sin(t)
+y <- cos(t)
+
+df <- data.frame(t, x, y)
+
+p <- ggplot(df, aes(x*t, y*t))
+p + geom_point(size = 80, alpha = 0.1, color = "magenta4", shape = 1) + theme(axis.line=element_blank(),axis.text.x=element_blank(),
+          axis.text.y=element_blank(),axis.ticks=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank(),legend.position="none",
+          panel.background=element_rect(fill="white"),panel.border=element_blank(),panel.grid.major=element_blank(),
+          panel.grid.minor=element_blank(),plot.background=element_rect(fill="white"))
+```
+
+

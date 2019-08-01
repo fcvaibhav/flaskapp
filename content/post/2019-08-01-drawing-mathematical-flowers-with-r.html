@@ -1,0 +1,84 @@
+---
+title: Drawing mathematical flowers with R
+author: ~
+date: '2019-08-01'
+slug: drawing-mathematical-flowers-with-r
+categories: []
+tags: []
+---
+
+
+
+<div id="exploring-visualisation-with-ggplot-while-playing-with-numbers" class="section level1">
+<h1>Exploring visualisation with ggplot while playing with numbers</h1>
+<p>In this post we’ll create a ‘flowery’ pattern using geom_point function. Let’s see how we build toward it step by step. (PS- I did this exercise as a part of a project in datacamp)</p>
+<div id="lets-begin-by-creating-a-basic-circle-in-r" class="section level4">
+<h4>Let’s begin by creating a basic circle in R</h4>
+<pre class="r"><code>t &lt;- seq(0, 2*pi, length.out = 50)
+x &lt;- sin(t)
+y &lt;- cos(t)
+df &lt;- data.frame(t, x, y)
+
+# Make a scatter plot of points in a circle
+p &lt;- ggplot(df, aes(x, y))
+p + geom_point()</code></pre>
+<p><img src="/post/2019-08-01-drawing-mathematical-flowers-with-r_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+<div id="let-us-now-increase-the-points-add-the-magic-of-golden-ratio-and-create-a-spiralling-effect" class="section level4">
+<h4>Let us now increase the points, add the magic of golden ratio, and create a spiralling effect</h4>
+<pre class="r"><code># Defining the number of points
+points &lt;- 500
+# Defining the Golden Angle
+angle &lt;- pi*(3-sqrt(5))
+
+t &lt;- (1:points) * angle
+x &lt;- sin(t)
+y &lt;-cos(t)
+df &lt;- data.frame(t, x, y)
+
+# Make a scatter plot of points in a spiral
+p &lt;- ggplot(df, aes(x*t, y*t))
+p + geom_point()</code></pre>
+<p><img src="/post/2019-08-01-drawing-mathematical-flowers-with-r_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="next-we-move-on-to-removing-the-distractions-and-adding-color" class="section level4">
+<h4>Next we move on to removing the distractions and adding color</h4>
+<pre class="r"><code>p + geom_point(size = 8, alpha = 0.5, color = &quot;darkgreen&quot;) + theme(axis.line=element_blank(),axis.text.x=element_blank(),
+          axis.text.y=element_blank(),axis.ticks=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank(),legend.position=&quot;none&quot;,
+          panel.background=element_rect(fill=&quot;white&quot;),panel.border=element_blank(),panel.grid = element_blank(), panel.grid.major=element_blank(),
+          panel.grid.minor=element_blank(),plot.background=element_rect(fill=&quot;white&quot;))</code></pre>
+<p><img src="/post/2019-08-01-drawing-mathematical-flowers-with-r_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="next-we-play-more-with-colour-and-shapes-of-points-and-attempt-to-create-a-sunflower-like-image-using-a-magenta-background-and-yellow-points" class="section level4">
+<h4>Next we play more with colour and shapes of points and attempt to create a sunflower like image using a magenta background and yellow points</h4>
+<pre class="r"><code>p + geom_point(aes(size = t), alpha = 0.5, color = &quot;yellow&quot;, shape = 17) + theme(axis.line=element_blank(),axis.text.x=element_blank(),
+          axis.text.y=element_blank(),axis.ticks=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank(),legend.position=&quot;none&quot;,
+          panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
+          panel.grid.minor=element_blank(),plot.background=element_rect(fill=&quot;darkmagenta&quot;))</code></pre>
+<p><img src="/post/2019-08-01-drawing-mathematical-flowers-with-r_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="lastly-with-another-experimentation-lets-add-a-hynotic-feel-to-the-flower-image-by-increasing-the-points-increasing-the-size-of-the-points-and-altering-the-angle" class="section level4">
+<h4>Lastly, with another experimentation, let’s add a hynotic feel to the flower image by increasing the points, increasing the size of the points, and altering the angle</h4>
+<pre class="r"><code>angle &lt;- 13*pi/180
+points &lt;- 2000
+
+t &lt;- (1:points)*angle
+x &lt;- sin(t)
+y &lt;- cos(t)
+
+df &lt;- data.frame(t, x, y)
+
+p &lt;- ggplot(df, aes(x*t, y*t))
+p + geom_point(size = 80, alpha = 0.1, color = &quot;magenta4&quot;, shape = 1) + theme(axis.line=element_blank(),axis.text.x=element_blank(),
+          axis.text.y=element_blank(),axis.ticks=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank(),legend.position=&quot;none&quot;,
+          panel.background=element_rect(fill=&quot;white&quot;),panel.border=element_blank(),panel.grid.major=element_blank(),
+          panel.grid.minor=element_blank(),plot.background=element_rect(fill=&quot;white&quot;))</code></pre>
+<p><img src="/post/2019-08-01-drawing-mathematical-flowers-with-r_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+</div>
